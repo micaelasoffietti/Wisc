@@ -63,9 +63,10 @@ public class MostrarPacientes extends CargarPacientes {
         int edad= Integer.parseInt(this.tblPacientes.getValueAt(fila,7).toString());
         float pesoNac= Float.parseFloat(this.tblPacientes.getValueAt(fila,8).toString());
         String localidad= tblPacientes.getValueAt(fila,9).toString();
+        int nroFam= Integer.parseInt(this.tblPacientes.getValueAt(fila,10).toString());
         
         Pacientes actu=new Pacientes();
-        actu.actualizarPaciente(id, nombreApe, dni, curso, escuela,fechaNac,obraSocial, edad, pesoNac, localidad);
+        actu.actualizarPaciente(id, nombreApe, dni, curso, escuela,fechaNac,obraSocial, edad, pesoNac, localidad,nroFam);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,8 +76,8 @@ public class MostrarPacientes extends CargarPacientes {
         btnBorrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         panel1 = new java.awt.Panel();
-        btnConsulta = new javax.swing.JButton();
         textID = new javax.swing.JTextField();
+        btnConsulta = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,7 +124,7 @@ public class MostrarPacientes extends CargarPacientes {
             }
         });
 
-        btnConsulta.setText("consulta");
+        btnConsulta.setText("consulta DNI");
         btnConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnConsultaMouseClicked(evt);
@@ -137,7 +138,7 @@ public class MostrarPacientes extends CargarPacientes {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnConsulta)
                 .addContainerGap())
         );
@@ -146,8 +147,8 @@ public class MostrarPacientes extends CargarPacientes {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsulta)
-                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsulta))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -163,7 +164,7 @@ public class MostrarPacientes extends CargarPacientes {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(83, 83, 83)
@@ -175,9 +176,9 @@ public class MostrarPacientes extends CargarPacientes {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
+                .addContainerGap(254, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(107, 107, 107)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

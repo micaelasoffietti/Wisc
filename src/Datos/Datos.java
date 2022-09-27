@@ -102,14 +102,15 @@ public class Datos {
         }
       }
       
-      public void actualizar(int id, String nombreApe, String dni, String curso, String escuela,String fechaNac, boolean obraSocial, int edad, float pesoNac, String localidad){
+      public void actualizar(int id, String nombreApe, String dni, String curso, String escuela,String fechaNac, boolean obraSocial, int edad, float pesoNac, String localidad,int nroFam){
           try {
               // pasamos a boleeano que lee 1 o 0 en la base de datos SQLITE. (No true ni false)
               int obra = obraSocial ? 1:0;
               //Pasamos del tipo de dato String al fecha. El table model no tiene tipo de dato fecha, por eso vamos convirtiendo.
               LocalDate fecha= LocalDate.parse(fechaNac);
-              PreparedStatement actu= connect.prepareStatement("UPDATE Pacientes SET NombreApellido='"+nombreApe+"',Dni='"+dni+"',Curso='"+curso+"',Escuela='"+escuela+"',FechaNac='"+fecha+"',ObraSocial='"+obra+"',PesoNacimiento='"+pesoNac+"',Localidad='"+localidad+"'WHERE PacienteID='"+id+"'");
+              PreparedStatement actu= connect.prepareStatement("UPDATE Pacientes SET NombreApellido='"+nombreApe+"',Dni='"+dni+"',Curso='"+curso+"',Escuela='"+escuela+"',FechaNac='"+fecha+"',ObraSocial='"+obra+"',PesoNacimiento='"+pesoNac+"',Localidad='"+localidad+"',FamiliaDirecta='"+nroFam+"'WHERE PacienteID='"+id+"'");
               actu.executeUpdate();
+              JOptionPane.showMessageDialog(null,"¡Modificado!");
               //Seleccionar(0,null);
           } catch (SQLException e) {
               JOptionPane.showMessageDialog(null,e+ "ERROR");

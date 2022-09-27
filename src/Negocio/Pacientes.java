@@ -43,6 +43,9 @@ public class Pacientes {
     
     public Pacientes(int id) {
         this.id = id;
+        //armar selec con id buscarlo en la base y pegarselo a las propiedades 
+        //new(1)
+        
     }
     
 
@@ -167,9 +170,9 @@ public class Pacientes {
     }
     
     //modificar una columna de la fila
-    public void actualizarPaciente(int id, String nombreApe, String dni, String curso, String escuela,String fechaNac,boolean obraSocial, int edad, float pesoNac, String localidad ){
+    public void actualizarPaciente(int id, String nombreApe, String dni, String curso, String escuela,String fechaNac,boolean obraSocial, int edad, float pesoNac, String localidad, int nroFam ){
         Datos dat= new Datos();
-        dat.actualizar(id,nombreApe,dni,curso,escuela,fechaNac,obraSocial,edad,pesoNac,localidad);
+        dat.actualizar(id,nombreApe,dni,curso,escuela,fechaNac,obraSocial,edad,pesoNac,localidad,nroFam);
     
     }
 }
