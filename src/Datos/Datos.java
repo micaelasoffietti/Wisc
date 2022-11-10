@@ -86,5 +86,14 @@ public class Datos {
     public Object getDataVector() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+      public void Cerrar(){
+         try {
+            connect.close();
+            JOptionPane.showMessageDialog(null, "FIN");
+    
+        }catch(Exception x){
+            JOptionPane.showMessageDialog(null, x.getMessage().toString());
+        }
+      }
 }

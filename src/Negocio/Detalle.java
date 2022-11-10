@@ -56,13 +56,13 @@ public DefaultTableModel getFacturaDetalle(String url, String nroFactura) throws
         dat.addColumn ("Cantidad");
         dat.addColumn("PrecioUnitario");
         dat.addColumn("IdDetalle");
-        Datos d = new Datos();
-        d.conectarBase(url);
+        Datos objDat= new Datos();
+        objDat.conectarBase(url);
         PreparedStatement sql= connect.prepareStatement("select * from DetalleFactura where IdFactura=? ");
         sql.setString(1,nroFactura);
         ResultSet resu = null;
        try{
-        resu=d.selec(sql);
+        resu=objDat.selec(sql);
         dat.getDataVector().removeAllElements();
        while (resu.next()){
                     Object[] fila =new Object[6];
@@ -132,22 +132,22 @@ public DefaultTableModel getFacturaDetalle(String url, String nroFactura) throws
     
     public void agregarDetalle() throws SQLException{
        //int factura=3;
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        PreparedStatement agregarDetalle = connect.prepareStatement ("insert into DetalleFactura(Servicio,PrecioServicio,Cantidad,PrecioUnitario,IdFactura) values ('"+servicio+"','"+precioServicio+"','"+cantidad+"','"+precioUnitario+"','"+idFactura+"')");
-       dat.insertar(agregarDetalle);
+       objDat.insertar(agregarDetalle);
        //agregarPaciente.setString(1,numero);
        
     }
      public void borrarDetalle() throws SQLException{//no va parametro pq toma de la propiedad
         PreparedStatement elimi= connect.prepareStatement("DELETE FROM DetalleFactura WHERE IdFactura='"+this.idFactura+"'");//this.id
-        Datos dat= new Datos();
-        dat.borrar(elimi);
+        Datos objDat= new Datos();
+        objDat.borrar(elimi);
     }
      
     public void modificarDetalle() throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        PreparedStatement modifpaciente = connect.prepareStatement("update DetalleFactura set Servicio = '"+servicio+"', PrecioServicio ='"+precioServicio+"', Cantidad ='"+cantidad+"', PrecioUnitario ='"+precioUnitario+"' where IdDetalle='"+idDetalle+"'");
-       dat.actualizar(modifpaciente);
+       objDat.actualizar(modifpaciente);
     }
     
 }

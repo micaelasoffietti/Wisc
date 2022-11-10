@@ -35,13 +35,13 @@ public class Agregar extends javax.swing.JFrame{
     }
 
     public void guardarMaestro() throws SQLException{
-        Maestro maestro= new Maestro();
+        Maestro btnMaestro= new Maestro();
         String fecha;
         //int total;
-        maestro.setFechaFac(textFecha.getText());
-        maestro.setIdPaciente(cbPacientes.getItemAt(cbPacientes.getSelectedIndex()).getId());
-        maestro.agregarDato();
-        idfactura = maestro.obtenerIDMaestro();
+        btnMaestro.setFechaFac(textFecha.getText());
+        btnMaestro.setIdPaciente(cbPacientes.getItemAt(cbPacientes.getSelectedIndex()).getId());
+        btnMaestro.agregarDato();
+        idfactura = btnMaestro.obtenerIDMaestro();
         
         //JOptionPane.showMessageDialog(null,Integer.toString(maestro.getIdFactura()));
         //new MaestroDetalle().setVisible(true); 
@@ -66,10 +66,10 @@ public class Agregar extends javax.swing.JFrame{
             totalfactura += precioservicio;
             //this.dispose();     
         }    
-        Maestro maestro = new Maestro();
-        maestro.setIdFactura(idfactura);
-        maestro.setTotalFactura(totalfactura);
-        maestro.modificarTotal();
+        Maestro btnMaestro = new Maestro();
+        btnMaestro.setIdFactura(idfactura);
+        btnMaestro.setTotalFactura(totalfactura);
+        btnMaestro.modificarTotal();
         
     }
     @SuppressWarnings("unchecked")
@@ -231,10 +231,10 @@ public class Agregar extends javax.swing.JFrame{
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        Pacientes paciente = new Pacientes();
+        Pacientes btnPaciente = new Pacientes();
         cbPacientes.removeAllItems();
         try {
-            listaPacientes = paciente.mostrarLista();
+            listaPacientes = btnPaciente.mostrarLista();
            for (int i = 0; i < listaPacientes.size(); i++)
            {
                cbPacientes.addItem(new Pacientes(listaPacientes.get(i).getId(),listaPacientes.get(i).getNombreApellido()));

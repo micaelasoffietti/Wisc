@@ -100,12 +100,12 @@ public class Maestro {
         dat.addColumn("Numero");
         dat.addColumn("Fecha");
         dat.addColumn("Total");
-        Datos d = new Datos();
-        d.conectarBase(url);
+        Datos objDat = new Datos();
+        objDat.conectarBase(url);
         PreparedStatement mo= connect.prepareStatement("select * from Factura");
         ResultSet resu = null;
        try{
-        resu=d.selec(mo);
+        resu=objDat.selec(mo);
         dat.getDataVector().removeAllElements();
        while (resu.next()){
                     Object[] fila =new Object[3];
@@ -123,36 +123,36 @@ public class Maestro {
     }
 
 public void agregarDato () throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        PreparedStatement agregarFactura = connect.prepareStatement ("insert into Factura (FechaFac,IdPaciente) values ('"+fechaFac+"','"+idPaciente+"')");
-       dat.insertar(agregarFactura);
+       objDat.insertar(agregarFactura);
        //agregarPaciente.setString(1,numero);
        
     }
 
 public int obtenerIDMaestro() throws SQLException{
-    Datos dat = new Datos();
+    Datos objDat = new Datos();
        PreparedStatement select = connect.prepareStatement ("select IdFactura from Factura where FechaFac = '"+fechaFac+"'and IdPaciente ='"+idPaciente+"'");
        ResultSet resu = null;
-       resu= dat.seleccionarId(select);
+       resu= objDat.seleccionarId(select);
        int id = resu.getInt("IdFactura");
        return id;
 }
 public void borrarFactura() throws SQLException{//no va parametro pq toma de la propiedad
         PreparedStatement elimi= connect.prepareStatement("DELETE FROM Factura WHERE IdFactura='"+this.idFactura+"'");//this.id
-        Datos dat= new Datos();
-        dat.borrar(elimi);
+        Datos objDat= new Datos();
+        objDat.borrar(elimi);
     }
  public void modificarFactura() throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        PreparedStatement modifpaciente = connect.prepareStatement("update Factura set FechaFac = '"+fechaFac+"',TotalFactura ='"+totalFactura+"' where IdFactura='"+idFactura+"'");
-       dat.actualizar(modifpaciente);
+       objDat.actualizar(modifpaciente);
  }
  
  public void modificarTotal() throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat= new Datos();
        PreparedStatement modifpaciente = connect.prepareStatement("update Factura set TotalFactura ='"+totalFactura+"' where IdFactura='"+idFactura+"'");
-       dat.actualizar(modifpaciente);
+       objDat.actualizar(modifpaciente);
  }
  
 }

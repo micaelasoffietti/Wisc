@@ -4,6 +4,7 @@ package Presentacion;
 
 import Negocio.Detalle;
 import Negocio.Maestro;
+import Negocio.Pacientes;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
@@ -25,8 +26,8 @@ public class MaestroDetalle extends javax.swing.JFrame {
  
     @SuppressWarnings("unchecked")
     public void InsertarFactura() throws SQLException{
-        Maestro agregar= new Maestro();
-        agregar.agregarDato();
+        Maestro objAgregar= new Maestro();
+        objAgregar.agregarDato();
         
         jTable1.setModel(new Maestro().getFactura(url));
         
@@ -52,6 +53,9 @@ public class MaestroDetalle extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -246,8 +250,8 @@ public class MaestroDetalle extends javax.swing.JFrame {
 
     private void btnAgregarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFacturaActionPerformed
         // TODO add your handling code here:
-        Agregar insert= new Agregar();
-        insert.setVisible(true);
+        Agregar objInsert= new Agregar();
+        objInsert.setVisible(true);
         try {
             jTable1.setModel(new Maestro().getFactura(url));
         } catch (SQLException ex) {
@@ -271,11 +275,11 @@ public class MaestroDetalle extends javax.swing.JFrame {
         // TODO add your handling code here:
         int filaFactura= jTable1.getSelectedRow(); //el numero de la fila que selecciono lo guardo en la variable fila.
         String valor=jTable1.getValueAt(filaFactura,0).toString(); //.0 la columna es el ID, fila es la variable que guarda la fila que hacemos click.
-        Maestro borro= new Maestro(Integer.parseInt(valor)); //.toString();//pasar a int
-        Detalle borro1=new Detalle();
+        Maestro objBorro= new Maestro(Integer.parseInt(valor)); //.toString();//pasar a int
+        Detalle objBorro1=new Detalle();
         try {
-            borro.borrarFactura();
-            borro1.borrarDetalle();
+            objBorro.borrarFactura();
+            objBorro1.borrarDetalle();
             jTable1.setModel(new Maestro().getFactura(url));
             jTable2.setModel(new Detalle().getFacturaDetalle(url, valor));
         } catch (SQLException ex) {
@@ -286,8 +290,8 @@ public class MaestroDetalle extends javax.swing.JFrame {
 
     private void btnBorrarDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarDetalleMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel(); //TableProducto es el nombre de mi tabla ;)
-        dtm.removeRow(jTable2.getSelectedRow());
+        DefaultTableModel objDtm = (DefaultTableModel) jTable2.getModel(); //TableProducto es el nombre de mi tabla ;)
+        objDtm.removeRow(jTable2.getSelectedRow());
     }//GEN-LAST:event_btnBorrarDetalleMouseClicked
 
     private void btnModificarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFacturaActionPerformed
@@ -297,11 +301,11 @@ public class MaestroDetalle extends javax.swing.JFrame {
         int filaFactura= jTable1.getSelectedRow(); //el numero de la fila que selecciono lo guardo en la variable fila.
         int id = Integer.parseInt(jTable1.getValueAt(filaFactura,0).toString());
         String fechamodificacion = jTable1.getValueAt(filaFactura,1).toString();
-        Maestro maestro = new Maestro();
-        maestro.setFechaFac(fechamodificacion);
-        maestro.setIdFactura(id);
+        Maestro objMaestro = new Maestro();
+        objMaestro.setFechaFac(fechamodificacion);
+        objMaestro.setIdFactura(id);
         try {
-            maestro.modificarFactura();
+            objMaestro.modificarFactura();
         } catch (SQLException ex) {
             Logger.getLogger(MaestroDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -319,14 +323,14 @@ public class MaestroDetalle extends javax.swing.JFrame {
         float precioservicio = Float.parseFloat(jTable2.getValueAt(filaDetalle,2).toString());
         int cantidad = Integer.parseInt(jTable2.getValueAt(filaDetalle,3).toString());
         float preciounitario = Float.parseFloat(jTable2.getValueAt(filaDetalle,4).toString());
-        Detalle detalle = new Detalle();
-        detalle.setCantidad(cantidad);
-        detalle.setPrecioServicio(precioservicio);
-        detalle.setPrecioUnitario(preciounitario);
-        detalle.setServicio(servicio);
-        detalle.setIdDetalle(id);
+        Detalle objDetalle = new Detalle();
+        objDetalle.setCantidad(cantidad);
+        objDetalle.setPrecioServicio(precioservicio);
+        objDetalle.setPrecioUnitario(preciounitario);
+        objDetalle.setServicio(servicio);
+        objDetalle.setIdDetalle(id);
         try {
-            detalle.modificarDetalle();
+            objDetalle.modificarDetalle();
         } catch (SQLException ex) {
             Logger.getLogger(MaestroDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -346,6 +350,13 @@ public class MaestroDetalle extends javax.swing.JFrame {
             Logger.getLogger(MaestroDetalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Pacientes objPac= new Pacientes();
+        objPac.Cerra();
+        
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
        

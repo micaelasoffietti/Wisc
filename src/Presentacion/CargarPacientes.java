@@ -40,27 +40,27 @@ public class CargarPacientes extends javax.swing.JFrame {
     String url="jdbc:sqlite:C:/Users/Micaela/Desktop/BaseDatos/Pacientes.s3db";
      
      public void conectar (String url) throws SQLException{
-        Pacientes conexion= new Pacientes();
-        Maestro conec= new Maestro();
-        conexion.conectar(url);
-        conec.getFactura(url);
+        Pacientes objConexion= new Pacientes();
+        Maestro objConec= new Maestro();
+        objConexion.conectar(url);
+        objConec.getFactura(url);
      }
      
      public void buscarPaciente(int id) throws SQLException{
          //model=(DefaultTableModel) this.tblPacientes.getModel();
-         Pacientes buscarid = new Pacientes();
-         buscarid.buscarId(id,model);
+         Pacientes objBuscarid = new Pacientes();
+         objBuscarid.buscarId(id,model);
          //buscarid.mostrar(model);
          
          //mostrarPacientes();
      }
-     
+      
      
      public void mostrarPacientes() throws SQLException{
         model=(DefaultTableModel) this.tblPacientes.getModel();
         //model.getDataVector().removeAllElements();
-        Pacientes mostrar= new Pacientes();
-        mostrar.mostrar(model);
+        Pacientes objMostrar= new Pacientes();
+        objMostrar.mostrar(model);
     }
     //new MostrarPacientes().setVisible(true);
     public static DefaultTableModel model;
@@ -97,14 +97,15 @@ public class CargarPacientes extends javax.swing.JFrame {
        int fila= tblPacientes.getSelectedRow(); //el numero de la fila que selecciono lo guardo en la variable fila.
        String valor= tblPacientes.getValueAt(fila,0).toString(); //.0 la columna es el ID, fila es la variable que guarda la fila que hacemos click.
         
-       Pacientes borro= new Pacientes(Integer.parseInt(valor)); //.toString();//pasar a int
+       Pacientes objBorro= new Pacientes(Integer.parseInt(valor)); //.toString();//pasar a int
         
-       borro.borrarPaciente();
-       borro.mostrar(model);
+       objBorro.borrarPaciente();
+       objBorro.mostrar(model);
   
     }
     @SuppressWarnings("unchecked")
-     public void cerrar(){
+     
+    public void cerrar(){
         String [] botones ={"Aceptar","Cancelar"};
         int eleccion = JOptionPane.showOptionDialog(this,"¿Desea abandonar la aplicación?","Mensaje de Confirmacion",
                 0,0,null,botones,this);
@@ -153,10 +154,12 @@ public class CargarPacientes extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnFactura = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -298,18 +301,6 @@ public class CargarPacientes extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textDni, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(textEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(textLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Nombre)
@@ -362,13 +353,28 @@ public class CargarPacientes extends javax.swing.JFrame {
                                 .addComponent(btnFactura)))
                         .addGap(69, 69, 69))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(textPesoNac, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textNroFamiliares, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textDni, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(textEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(textLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(textPesoNac, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textNroFamiliares, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,7 +416,7 @@ public class CargarPacientes extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(textNroFamiliares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 6, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -418,9 +424,9 @@ public class CargarPacientes extends javax.swing.JFrame {
                                     .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10))
                                 .addGap(4, 4, 4)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textPesoNac, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(textPesoNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -442,9 +448,9 @@ public class CargarPacientes extends javax.swing.JFrame {
 
     private void btnMostrarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarPacientesActionPerformed
         // TODO add your handling code here:
-        Datos dat= new Datos();
+        Datos objDat= new Datos();
         try {       
-            dat.run();
+            objDat.run();
         } catch (SQLException ex) {
             Logger.getLogger(CargarPacientes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -509,8 +515,8 @@ public class CargarPacientes extends javax.swing.JFrame {
         LocalDate fechaNacimiento = LocalDate.parse(fechanac, fmt);
         LocalDate ahora = LocalDate.now();
 
-        Period periodo = Period.between(fechaNacimiento, ahora);
-        edad = periodo.getYears();
+        Period objPeriodo = Period.between(fechaNacimiento, ahora);
+        edad = objPeriodo.getYears();
         
         return edad;
     }
@@ -533,7 +539,11 @@ public class CargarPacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_textEdadMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+        Pacientes objNeg= new Pacientes();
+        objNeg.Cerra();
         cerrar();
+        
     }//GEN-LAST:event_formWindowClosing
   
     private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
@@ -596,12 +606,16 @@ public class CargarPacientes extends javax.swing.JFrame {
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
         try {
             // TODO add your handling code here:
-            MaestroDetalle maestro = new MaestroDetalle();
-            maestro.setVisible(true);
+            MaestroDetalle objMaestro = new MaestroDetalle();
+            objMaestro.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(CargarPacientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnFacturaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
    
     public static void main(String args[]) {

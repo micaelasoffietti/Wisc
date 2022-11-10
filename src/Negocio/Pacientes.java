@@ -183,8 +183,8 @@ public class Pacientes {
 
     //conectar la base de datos
      public void conectar(String URL){
-       Datos dat = new Datos();
-       dat.conectarBase(URL);
+       Datos objDat = new Datos();
+       objDat.conectarBase(URL);
     }
     //busca todos los pacientes
     public void mostrar (DefaultTableModel model) throws SQLException{
@@ -219,11 +219,11 @@ public class Pacientes {
     //pusimos buscar el dni solamente a modo de ejemplo
     public void buscarId (int id,DefaultTableModel model) throws SQLException{
        ResultSet result = null;
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        PreparedStatement st= connect.prepareStatement("Select * From Pacientes where PacienteID = "+id);
-       dat.seleccionarId(st);
+       objDat.seleccionarId(st);
        try{
-       result= dat.seleccionar(st);
+       result= objDat.seleccionar(st);
        model.getDataVector().removeAllElements();
        while (result.next()){
                         model.addRow(
@@ -250,35 +250,35 @@ public class Pacientes {
     
     //ingresa paciente
     public void agregarPaciente () throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        int obra = obraSocial ? 1:0;
        PreparedStatement agregarPaciente = connect.prepareStatement ("insert into Pacientes (NombreApellido,Dni,Localidad,FechaNac,Curso,Escuela,PesoNacimiento,Edad,FamiliaDirecta,ObraSocial) values ('"+nombreApellido+"','"+dni+"','"+localidad+"','"+fechaNac+"','"+curso+"','"+escuela+"',"+pesoNac+","+edad+","+nroFamilia+","+obra+")");
-       dat.insertar(agregarPaciente);
+       objDat.insertar(agregarPaciente);
        
     }
     //borra la fila completa
     public void borrarPaciente() throws SQLException{//no va parametro pq toma de la propiedad
         PreparedStatement elimi= connect.prepareStatement("DELETE FROM Pacientes WHERE pacienteID='"+this.id+"'");//this.id
-        Datos dat= new Datos();
-        dat.borrar(elimi);
+        Datos objDat= new Datos();
+        objDat.borrar(elimi);
     }
     
     
     public void modificarPaciente () throws SQLException{
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        int obra = obraSocial ? 1:0;
        PreparedStatement modifpaciente = connect.prepareStatement("update Pacientes set NombreApellido = '"+nombreApellido+"',Dni = '"+dni+"' ,Localidad = '"+localidad+"',FechaNac ='"+fechaNac+"' ,Curso = '"+curso+"',Escuela ='"+escuela+"',PesoNacimiento ="+pesoNac+",Edad ="+edad+",FamiliaDirecta = "+nroFamilia+",ObraSocial="+obra+" where PacienteID ="+this.id+"");
-       dat.actualizar(modifpaciente);
+       objDat.actualizar(modifpaciente);
        
     }
 
     public ArrayList mostrarLista () throws SQLException{
        ResultSet result = null;
        PreparedStatement mostrarTabla= connect.prepareStatement("Select * From Pacientes");
-       Datos dat = new Datos();
+       Datos objDat = new Datos();
        ArrayList listaPacientes = new ArrayList();
        try{
-       result= dat.seleccionar(mostrarTabla);
+       result= objDat.seleccionar(mostrarTabla);
        while (result.next()){
                                 Pacientes pac = new Pacientes();
                                 pac.setId(result.getInt("PacienteID"));
@@ -300,6 +300,11 @@ public class Pacientes {
     }
     return listaPacientes;
     }
+    public void Cerra() {
+        Datos objDat= new Datos();
+        objDat.Cerrar();
+   }
 }
+
 
 
